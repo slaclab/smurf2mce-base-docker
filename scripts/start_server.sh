@@ -52,17 +52,20 @@ getGitHashFW()
     local gh_inv
     local gh
 
-    # Long githash
+    # Long githash (inverted)
     #gh_inv=$(ipmitool -I lan -H $SHELFMANAGER -t $IPMB -b 0 -A NONE raw 0x34 0x04 0xd0 0x14  2> /dev/null)
-    # Short githash
+    # Short githash (inverted)
     gh_inv=$(ipmitool -I lan -H $shelfmanager -t $ipmb -b 0 -A NONE raw 0x34 0x04 0xe0 0x04  2> /dev/null)
 
     if [ "$?" -ne 0 ]; then
         kill -s TERM ${top_pid}
     fi
 
+    # Invert the string
     for c in ${gh_inv} ; do gh=${c}${gh} ; done
-    echo ${gh}
+
+    # Return the short hash (7 bytes)
+    echo ${gh} | cut -c 1-7
 }
 
 getGitHashMcs()
@@ -70,7 +73,8 @@ getGitHashMcs()
     local filename=$(basename $mcs_file_name)
     local gh=$(echo $filename | sed  -r 's/.+-+(.+).mcs.*/\1/')
 
-    echo ${gh}
+    # Return the short hash (7 bytes)
+    echo ${gh} | cut -c 1-7
 }
 
 getCrateId()

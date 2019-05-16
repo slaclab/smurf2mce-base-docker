@@ -244,6 +244,18 @@ else
     echo "Server GUI enabled."
 fi
 
+# If the slot number is defined, add the RSSI link number argument
+# which is needed if the PCIe card is used for communication
+if [ ${slot+x} ]; then
+    # Verify that the slot number is in the range [2,7]
+    if [ ${slot} -ge 2 -a ${slot} -le 7 ]; then
+        args="${args} -l $((slot-2))"
+    else
+        echo "Invalid slot number! Must be a number between 2 and 7."
+        exit 1
+    fi
+fi
+
 # MCE library location
 MCE_LIB_PATH=/usr/local/src/smurf2mce/mcetransmit/lib/
 export PYTHONPATH=$MCE_LIB_PATH:${PYTHONPATH}

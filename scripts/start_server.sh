@@ -262,6 +262,4 @@ export PYTHONPATH=$MCE_LIB_PATH:${PYTHONPATH}
 
 echo "Starting server..."
 cd /data/smurf2mce_config/
-#/usr/local/src/smurf2mce/mcetransmit/scripts/control-server/start_server.sh -a ${fpga_ip} -c eth-rssi-interleaved -t ${pyrogue_file} -d ${fw_top_dir}/config/default.yaml  -f Int16 -b 524288 ${args}
-# /usr/local/src/smurf2mce/mcetransmit/scripts/control-server/python/pyrogue_server.py -a ${fpga_ip} -c eth-rssi-interleaved -d ${fw_top_dir}/defaults.yml  -f Int16 -b 524288 ${args}
 /usr/local/src/smurf2mce/mcetransmit/scripts/control-server/python/pyrogue_server.py  ${args}

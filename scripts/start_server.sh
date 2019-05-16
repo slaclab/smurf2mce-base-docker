@@ -186,6 +186,25 @@ fi
 # Add the IP address to the SMuRF arguments
 args="${args} -a ${fpga_ip}"
 
+# Check if the server GUI was requested
+if [ -z ${use_gui+x} ]; then
+    args="${args} -s"
+else
+    echo "Server GUI enabled."
+fi
+
+# If the slot number is defined, add the RSSI link number argument
+# which is needed if the PCIe card is used for communication
+if [ ${slot+x} ]; then
+    # Verify that the slot number is in the range [2,7]
+    if [ ${slot} -ge 2 -a ${slot} -le 7 ]; then
+        args="${args} -l $((slot-2))"
+    else
+        echo "Invalid slot number! Must be a number between 2 and 7."
+        exit 1
+    fi
+fi
+
 # Extract the pyrogue tarball and update PYTHONPATH
 echo "Looking for pyrogue tarball..."
 pyrogue_file=$(find ${fw_top_dir} -maxdepth 1 -name *pyrogue.tar.gz)
@@ -235,25 +254,6 @@ if [ -z ${no_check_fw+x} ]; then
 
 else
     echo "Check firmware disabled."
-fi
-
-# Check if the server GUI was requested
-if [ -z ${use_gui+x} ]; then
-    args="${args} -s"
-else
-    echo "Server GUI enabled."
-fi
-
-# If the slot number is defined, add the RSSI link number argument
-# which is needed if the PCIe card is used for communication
-if [ ${slot+x} ]; then
-    # Verify that the slot number is in the range [2,7]
-    if [ ${slot} -ge 2 -a ${slot} -le 7 ]; then
-        args="${args} -l $((slot-2))"
-    else
-        echo "Invalid slot number! Must be a number between 2 and 7."
-        exit 1
-    fi
 fi
 
 # MCE library location

@@ -27,7 +27,7 @@ RUN cmake .. && make -j4 install
 
 # Install smurf2mce
 WORKDIR /usr/local/src
-RUN git clone https://github.com/slaclab/smurf2mce.git -b R2.6.0
+RUN git clone https://github.com/slaclab/smurf2mce.git -b R3.0.0
 WORKDIR smurf2mce/mcetransmit
 RUN mkdir build
 WORKDIR build

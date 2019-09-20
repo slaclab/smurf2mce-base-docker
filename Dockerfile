@@ -9,10 +9,9 @@ RUN git submodule sync && git submodule update --init --recursive
 ENV PYTHONPATH /usr/local/src/smurf-pcie/software/python:${PYTHONPATH}
 ENV PYTHONPATH /usr/local/src/smurf-pcie/firmware/submodules/axi-pcie-core/python:${PYTHONPATH}
 
-
 # Apply a path to software/python/SmurfKcu1500RssiOffload/_Core.py
 # Which uses a newer version of surf that the current SMuRF firmware,
-# which doesn'y have a AxiStreamDmaFifo device.
+# which doesn't have a AxiStreamDmaFifo device.
 # In the near future, the pcie pyrogue server will run in an independent
 # docker container.
 RUN mkdir -p patches

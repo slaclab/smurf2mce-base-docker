@@ -1,0 +1,30 @@
+diff --git a/software/python/SmurfKcu1500RssiOffload/_Core.py b/software/python/SmurfKcu1500RssiOffload/_Core.py
+index d6cfac5..a763e02 100644
+--- a/software/python/SmurfKcu1500RssiOffload/_Core.py
++++ b/software/python/SmurfKcu1500RssiOffload/_Core.py
+@@ -84,12 +84,12 @@ class UdpBufferGrp(pr.Device):
+             **kwargs):
+         super().__init__(name=name, description=description, **kwargs)
+         
+-        for i in range(6):
+-            self.add(axi.AxiStreamDmaFifo(            
+-                name   = f'UdpBuffer[{i}]',
+-                offset = (i*0x1000), 
+-                expand = False,
+-            ))     
++        #for i in range(6):
++        #    self.add(axi.AxiStreamDmaFifo(
++        #        name   = f'UdpBuffer[{i}]',
++        #        offset = (i*0x1000),
++        #        expand = False,
++        #    ))
+ 
+         self.add(smurf.UdpDebug(            
+             offset = 0x6000, 
+@@ -131,4 +131,4 @@ class Core(pr.Device):
+             for i in range(6):
+                 self.UdpGrp.RssiClient[i].C_RestartConn()
+                 
+-##############################################################################                
+\ No newline at end of file
++##############################################################################

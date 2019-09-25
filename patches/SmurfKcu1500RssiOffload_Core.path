@@ -3,14 +3,14 @@ index d6cfac5..2324d15 100644
 --- a/software/python/SmurfKcu1500RssiOffload/_Core.py
 +++ b/software/python/SmurfKcu1500RssiOffload/_Core.py
 @@ -33,7 +33,7 @@ class EthPhyGrp(pr.Device):
-             self.add(ethPhy.TenGigEthReg(
+             self.add(ethPhy.TenGigEthReg(            
                  name    = f'EthPhy[{i}]',
-                 offset  = i*0x1000,
+                 offset  = i*0x1000, 
 -                writeEn = True,
 +                #writeEn = True,
                  expand  = False,
-             ))
-
+             ))  
+             
 @@ -84,12 +84,12 @@ class UdpBufferGrp(pr.Device):
              **kwargs):
          super().__init__(name=name, description=description, **kwargs)

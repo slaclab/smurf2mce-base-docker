@@ -1,4 +1,4 @@
-FROM tidair/smurf-rogue:R1.1.0
+FROM tidair/smurf-rogue:R2.0.0
 
 # Install the SMURF PCIe card repository
 WORKDIR /usr/local/src
@@ -36,7 +36,7 @@ RUN cmake .. && make -j4 install
 
 # Install smurf2mce
 WORKDIR /usr/local/src
-RUN git clone https://github.com/slaclab/smurf2mce.git -b R3.1.1
+RUN git clone https://github.com/slaclab/smurf2mce.git -b R3.1.2
 WORKDIR smurf2mce/mcetransmit
 RUN mkdir build
 WORKDIR build
